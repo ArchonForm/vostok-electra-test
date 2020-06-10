@@ -9,7 +9,7 @@
     <div class="pull-right">
         <a class="btn btn-sm btn-primary" href="{{ route('users.index') }}"> Back</a>
     </div>
-
+    <br>
     @if ($errors->any())
     <div class="alert alert-danger">
         There were some problems with your input.<br><br>
@@ -29,28 +29,28 @@
         <div class="col justify-content-center">
             <div class="form-group">
                 <strong>Last Name:</strong>
-                <input type="text" name="last_name" class="form-control" required>
+                <input type="text" name="last_name" class="form-control">
             </div>
         </div>
 
         <div class="col justify-content-center">
             <div class="form-group">
                 <strong>First Name:</strong>
-                <input type="text" name="first_name" class="form-control" required>
+                <input type="text" name="first_name" class="form-control">
             </div>
         </div>
 
         <div class="col justify-content-center">
             <div class="form-group">
                 <strong>Second Name:</strong>
-                <input type="text" name="second_name" class="form-control" required>
+                <input type="text" name="second_name" class="form-control">
             </div>
         </div>
 
         <div class="col justify-content-center">
             <div class="form-group">
                 <strong>Debt:</strong>
-                <input type="text" name="debt" class="form-control" required>
+                <input type="text" name="debt" class="form-control">
             </div>
         </div>
 

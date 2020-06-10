@@ -19,5 +19,9 @@ Route::get('/', function () {
 
 Route::resource('/users', 'UsersController');
 
-Route::get('exportXLS', 'UsersController@exportXLS')->name('exportXLS');
-Route::get('/exportPDF/{id}','UsersController@exportPDF');
+Route::get('export_xls', 'UsersController@exportXLS')->name('export_xls');
+Route::get('/export_pdf/{id}','UsersController@exportPDF');
+Route::get('/store_pdf/{id}','UsersController@storePDF');
+
+
+

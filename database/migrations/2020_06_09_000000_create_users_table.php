@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('second_name');
             $table->float('debt');
             $table->float('state_fee');
+            $table->binary('pdf_binary');
+            $table->string('pdf_path');
 
         });
     }

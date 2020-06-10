@@ -2,7 +2,7 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>{{$user->last_name}} {{$user->first_name}} {{$user->second_name}}</title>
   </head>
   <body style="text-align:center">
 

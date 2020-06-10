@@ -42,13 +42,16 @@ class UsersController extends Controller
     {
         $request->validate([
             'last_name' => 'required',
+            'first_name' => 'required',
+            'second_name' => 'required',
+            'debt' => 'required',
 
         ]);
 
         Users::create($request->all());
 
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
+            ->with('success', 'User successfully added.');
     }
 
     /**
@@ -60,40 +63,6 @@ class UsersController extends Controller
     public function show(Users $user)
     {
         return view('users.show', compact('user'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Users  $users
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Users $users)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Users  $users
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Users $users)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Users  $users
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Users $users)
-    {
-        //
     }
 
     public function exportXLS()
@@ -108,5 +77,24 @@ class UsersController extends Controller
         $pdf = PDF::loadView('users.pdf', compact('user'));
 
         return $pdf->download($userFullName . '.pdf');
+    }
+
+    public function storePDF($id)
+    {
+        $user = Users::find($id);
+        $pdf = PDF::loadView('users.pdf', compact('user')); // generate pdf file
+        $pdfContent = $pdf->output(); // get content of generated file
+        $pdfFileName = $user->last_name . '_' . $user->first_name . '_' . $user->second_name . '.pdf'; // generate pdf file name
+        $pdfPath = 'uploads/' . $pdfFileName; // pdf file path
+
+        if (!$user->pdf_binary) 
+        {
+            $user->pdf_binary = pg_escape_bytea($pdfContent); // store pdf file content to database
+            $user->pdf_path = $pdfPath; // store pdf file path to database
+            $user->save();
+            file_put_contents($pdfPath, $pdfContent); //store pdf file to server
+        }
+
+        return response($pdfContent)->header('Content-Type', 'application/pdf');
     }
 }
