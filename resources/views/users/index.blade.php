@@ -2,13 +2,19 @@
 
 @section('content')
     <div class="container">
-
         <a href="{{route('users.create')}}" class="btn btn-primary">Add new User</a>
    <br>
    <br>
    <a href="{{route('export_xls')}}" class="btn btn-success">Save table to XLS</a>
    <br>
    <br>
+
+   @if (\Session::has('success'))
+   <div class="alert alert-success">
+       {!! \Session::get('success') !!}
+    </div>
+   @endif
+
         <table class="table table-stripped table-bordered">
             <thead class="thead-dark text-center">
                 <th>id</th>

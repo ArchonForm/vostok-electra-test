@@ -44,7 +44,7 @@ class UsersController extends Controller
             'last_name' => 'required',
             'first_name' => 'required',
             'second_name' => 'required',
-            'debt' => 'required',
+            'debt' => 'required|numeric',
 
         ]);
 
